@@ -29,35 +29,31 @@ const expected = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
  * Best: O(n^2) quadratic.
  * Average: O(n^2) quadratic.
  * Worst: O(n^2) quadratic.
- * @param {Array<number>} nums
- * @returns {Array<number>} The given array after being sorted.
+ * @param   {Array<number>} nums
+ * @return  {Array<number>} The given array after being sorted.
  */
 function selectionSort(nums = []) {
-    let lowestValue;
-    let currentIndex = 0;
+  const len = nums.length;
+  let selectedIdx = 0;
+  let idxOfCurrMin = 0;
 
-    for (let i = 0; i < nums.length; i++) {
-        for (let j = 0; j < nums.length; j++) {
-            if (nums[j] > nums[i]) {
-                continue
-            } else {
-                lowestValue = nums[i];
-            }
-            nums[j] = lowestValue;
-            // console.log(temp);
-            // nums[currentIndex] = lowestValue;
-            // currentIndex++;
-        }
-        let temp = nums[i];
-        lowestValue = temp;
-        console.log(lowestValue)
-        // nums[currentIndex] = lowestValue;
-        // nums[currentIndex] = lowestValue;
-        currentIndex++;
-    }    
-    return nums;
+  while (selectedIdx < len) {
+    for (let i = selectedIdx; i < len; i++) {
+      if (nums[i] < nums[idxOfCurrMin]) {
+        idxOfCurrMin = i;
+      }
+    }
+
+    if (nums[selectedIdx] !== nums[idxOfCurrMin]) {
+      // Swap.
+      [nums[selectedIdx], nums[idxOfCurrMin]] = [
+        nums[idxOfCurrMin],
+        nums[selectedIdx],
+      ];
+    }
+    selectedIdx += 1;
+    // reset idxOfCurrMin to the next selected index we are going to work with to find the next min
+    idxOfCurrMin = selectedIdx;
+  }
+  return nums;
 }
-
-console.log(selectionSort(numsRandomOrder));
-
-
