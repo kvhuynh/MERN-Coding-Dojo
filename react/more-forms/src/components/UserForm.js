@@ -7,6 +7,7 @@ export const UserForm = props => {
     const [email, setEmail] = useState("");
     const[password, setPassword] = useState("");
     const[confirmPassword, setConfirmPassword] = useState("");
+    const[invalidInputError, setInvalidInputError] = useState("");
 
     const createUser = (e) => {
         e.preventDefault();
@@ -14,13 +15,42 @@ export const UserForm = props => {
         console.log(newUser)
     }
 
+    const handleName = (e) => {
+        console.log(e)
+    }
+    
+
+
+    const handleFirstNameError = (e) => {
+
+    }
+
+    const handleLastNameError = (e) => {
+
+    }
+
+    const handleEmailError = (e) => {
+
+    }
+
+    const handlePasswordError = (e) => {
+
+    }
+
+    const handlePasswordConfirmationError = (e) => {
+
+    }
+
+
     return (
         <div>
             <div className="user-form">
                 <form onSubmit={ createUser }>
                     <div>
+                        {/* <label>First Name: </label>
+                        <input type="text" onChange={ (e) => setFirstName(e.target.value)} value={ firstName } /> */}
                         <label>First Name: </label>
-                        <input type="text" onChange={ (e) => setFirstName(e.target.value)} value={ firstName } />
+                        <input type="text" className="firstName" onChange={ (e) => handleName(e.target.className)}/>
                     </div>
                     <div>
                         <label>Last Name: </label>
@@ -47,7 +77,7 @@ export const UserForm = props => {
                 <p>Email: { email }</p>
                 <p>Password: { password }</p>
                 <p>Confirm Password: { confirmPassword }</p>
-            </div>
+            </div>  
         </div>
     )
 }
