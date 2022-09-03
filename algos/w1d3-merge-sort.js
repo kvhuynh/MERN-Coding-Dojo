@@ -37,40 +37,45 @@ const sortedB4 = [3, 7, 8, 10];
 const expectedMerge4 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 /**
- * Efficiently merges two already sorted arrays into a new sorted array.
- * Do not mutate the given arrays.
- * - Time: O(?).
- * - Space: O(?).
+ * Merges two already sorted arrays into a new sorted array.
+ * - Time: O(n + m) -> O(n) linear n = left.length, m = right.length.
+ *    Every item from each array is visited once.
+ * - Space: O(n + m) -> O(n) linear.
  * @param {Array<number>} left
  * @param {Array<number>} right
  * @returns {Array<number>} A new sorted array containing all the elements of
  *    both given halves.
  */
 function merge(left = [], right = []) {
-    let mergedArray = [];
-    let leftIndex = 0;
-    let rightIndex = 0;
+  let result = [];
+  let indexLeft = 0;
+  let indexRight = 0;
 
-    while (leftIndex < left.length && rightIndex < right.length) {
-        if (left[leftIndex] > right[rightIndex]) {
-            mergedArray.push(right[rightIndex]);
-            rightIndex++;
-        } else {
-            mergedArray.push(left[leftIndex]);
-            leftIndex++;
-        }
-        
+  while (indexLeft < left.length && indexRight < right.length) {
+    if (left[indexLeft] < right[indexRight]) {
+      result.push(left[indexLeft]);
+      indexLeft++;
+    } else {
+      result.push(right[indexRight]);
+      indexRight++;
     }
+  }
 
-    if (leftIndex < left.length) {
-        mergedArray.concat(left)
-    }
+  // in case one of the arrays has remaining items due to unequal lengths, all of those can be added
+  while (indexLeft < left.length) {
+    result.push(left[indexLeft]);
+    indexLeft++;
+  }
 
-    if (rightIndex < right.length) {
-        mergedArray.concat(right)
-    }
+  while (indexRight < right.length) {
+    result.push(right[indexRight]);
+    indexRight++;
+  }
 
-    return mergedArray;
+  return result;
+
+  // one liner version of adding in any left over items
+  // return result.concat(left.slice(indexLeft)).concat(right.slice(indexRight));
 }
 
 // mergeSort
@@ -89,7 +94,17 @@ const expectedSort = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
  * @returns {Array<number>} A New sorted array.
  */
 function mergeSort(nums = []) {
+  if (nums.length === 1) {
+    // return once we hit an array with a single item
+    return nums;
+  }
 
+  const middleIdx = Math.floor(nums.length / 2);
+  const left = nums.slice(0, middleIdx);
+  const right = nums.slice(middleIdx);
+  const sortedLeft = mergeSort(left);
+  const sortedRight = mergeSort(right);
+  return merge(sortedLeft, sortedRight);
 }
 
-console.log(merge(sortedA3, sortedB3));
+mergeSort(numsRandomOrder);
