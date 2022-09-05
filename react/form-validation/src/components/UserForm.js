@@ -1,20 +1,13 @@
 import React, { useReducer } from 'react';
 
 function reducer(state, action) {
-    console.log("state is :" + state.firstName);
+    console.log("firstName state is :" + state.firstName.value);
+    console.log("lastName state is :" + state.lastName.value);
+    console.log("email state is :" + state.email.value);
+
     console.log("action type is:" + action.type);
     console.log("action payload is:" + action.payload);
-
-    let newState;
-    newState = {...state, [action.type]: action.payload}
-    return 
     
-    // switch(action.type) {
-    //     case "firstName":
-    //         if (action.payload.length) {
-    //             return {...state.firstName.error, [action.type]: action.payload}
-    //         }
-    // }
     return {
         ...state,
         [action.type]: action.payload
@@ -24,20 +17,20 @@ function reducer(state, action) {
 export const UserForm = () => {
 
     const initialState = {
-        firstName: {
-            value: "asdfasdf",
-            error: null
-        },
-        lastName: {
-            value: "",
-            error:null
-        },
-        email: {
-            value: "",
-            error: null
-        }
-
-    };
+            firstName: {
+                value: 'asdfadf',
+                error: null
+            },
+            lastName: {
+                value: '',
+                error: null
+            },
+            email: {
+                value: '',
+                error: null
+            }
+        };
+        
 
     const [state, dispatch] = useReducer(reducer, initialState)
 
@@ -102,6 +95,9 @@ export default UserForm;
 // };
  
 // function reducer(state, action) {
+//     console.log("state is :" + state.name);
+//     console.log("action type is:" + action.type);
+//     console.log("action payload is:" + action.payload);
 //     return {
 //         ...state,
 //         [action.type]: action.payload
