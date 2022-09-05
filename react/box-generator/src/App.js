@@ -14,7 +14,6 @@ function App() {
   return (
     <div className="App">
       <UserForm getNewColor={ newColoredBox }></UserForm>
-      <BoxDisplay color={ currentColor }></BoxDisplay>
     </div>
   );
 }

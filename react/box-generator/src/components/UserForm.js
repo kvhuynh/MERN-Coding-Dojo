@@ -1,15 +1,14 @@
 import { useState } from "react";
 
 export const UserForm = (props) => {
-    const [color, setColor] = useState("");
+    const [colorList, setColorList] = useState([]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        props.getNewColor(color);
     }
 
     const handleChange = (e) => {
-        setColor(e.target.value);
+        setColorList(e.target.value);
     }
 
     return(
@@ -19,7 +18,15 @@ export const UserForm = (props) => {
                 <input type="text" name="color" value={ color }onChange={ handleChange }/>
                 <button type="submit">Add</button>
             </form>
-            <p>{color}</p>
+
+
+            <main className="flex-row flex-wrap">
+                {colorList.map((color, i) => {
+                    return(
+                        <section className="box" style={{backgroundColor: color[i]}}></section>
+                    )
+                })}
+            </main>
         </div>
 
 
