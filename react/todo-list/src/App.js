@@ -1,5 +1,6 @@
 import "./App.css"
 
+import Todo from "./components/Todo";
 
 import React, { useState } from "react";
 
@@ -57,18 +58,16 @@ function App() {
       </form>
 
       {currentListTodos.map((todo, i) => {
-        const todoClasses =["bold"];
+        // const todoClasses =["bold"];
 
-        if (todo.isComplete) {
-          todoClasses.push("line-through")
-        }
+        // if (todo.isComplete) {
+        //   todoClasses.push("line-through")
+        // }
 
-        return (
-          <div key={i}>
-            <span className={todoClasses.join(" ")}>{todo.text}</span>
-            <input onChange={(e) => {handleCompletion(i)}} checked={todo.isComplete} type="checkbox" />
-            <button onClick={(e) => {handleDeleteItem(e, i)}}>delete</button>
-          </div>)})}
+        return ( 
+          <Todo key={i} todo={todo} handleCompletion={handleCompletion} handleDeleteItem={handleDeleteItem} i={i}></Todo>
+        )
+      })}
 
 
     </div>
