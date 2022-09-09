@@ -4,29 +4,26 @@ import { Link, useParams } from "react-router-dom";
 import { getData } from "../services/StarWarsAPIService"
 
 export const Films = (props) => {
-    const [data, setData] = useState(null);
-    // console.log("props" + props);
-    // console.log("useParams" + topic);
-    // console.log("id" + id);
+    // const [data, setData] = useState(null);
+    // const { id } = useParams();
 
-    const { id } = useParams();
+    // useEffect(() => {
+    //     getData("films", id)
+    //     .then((data) => {
+    //         setData(data)
+    //     }).catch((error) => {
+    //         console.log(error);
+    //     }).finally(() => {
+    //         console.log("done");
+    //     })
+    // }, [id])
 
-    useEffect(() => {
-        getData("films", id)
-        .then((data) => {
-            setData(data)
-        }).catch((error) => {
-            console.log(error);
-        }).finally(() => {
-            console.log("done");
-        })
-    }, [id])
+    // if (data === null) {
+    //     return "not found"
+    // }
 
-    if (data === null) {
-        return "not found"
-    }
-
-    const  {title, episode_id, opening_crawl, release_date } = data;
+    // const  {title, episode_id, opening_crawl, release_date } = data;
+    const  {title, episode_id, opening_crawl, release_date } = props;
 
 
     return (

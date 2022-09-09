@@ -1,38 +1,34 @@
-import { useEffect, useState } from "react";
+import { React, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import { getData } from "../services/StarWarsAPIService"
 
 export const People = (props) => {
-    const [data, setData] = useState(null);
-    // console.log("props" + props);
-    // console.log("useParams" + topic);
-    // console.log("id" + id);
+    console.log(props);
+    // const [data, setData] = useState(null);
+    // const { id } = useParams();
 
-    const { id } = useParams();
-
-    useEffect(() => {
-        getData("people", id)
-        .then((data) => {
-            setData(data)
-        }).catch((error) => {
-            console.log(error);
-        }).finally(() => {
-            console.log("done");
-            console.log(data);
+    // useEffect(() => {
+    //     getData("people", id)
+    //     .then((data) => {
+    //         setData(data)
+    //     }).catch((error) => {
+    //         console.log(error);
+    //     }).finally(() => {
+    //         console.log("done");
+    //         console.log(data);
             
-        })
-    }, [id])
+    //     })
+    // }, [id])
 
-    if (data === null) {
-        return "not found"
-    }
+    // if (data === null) {
+    //     return "not found"
+    // }
 
-    console.log(data);
+    // const {name, height, mass, hair_color, skin_color, eye_color} = data;
 
-    const {name, height, mass, hair_color, skin_color, eye_color} = data;
+    const {name, height, mass, hair_color, skin_color, eye_color} = props;
 
-    // console.log(name);
 
     return (
         <div>

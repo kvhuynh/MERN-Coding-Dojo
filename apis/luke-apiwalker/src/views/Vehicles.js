@@ -6,10 +6,6 @@ import { getData } from "../services/StarWarsAPIService"
 export const Vehicles = (props) => {
     const [data, setData] = useState(null);
     const [errorState, setErrorState] = useState(false)
-    // console.log("props" + props);
-    // console.log("useParams" + topic);
-    // console.log("id" + id);
-
     const { id } = useParams();
 
     useEffect(() => {
@@ -28,11 +24,12 @@ export const Vehicles = (props) => {
     }
 
     const {name, model, manufacturer, cost_in_credits, cargo_capacity, pilots} = data;
+    // const {name, model, manufacturer, cost_in_credits, cargo_capacity, pilots} = props;
 
 
     return (
         <div>
-            
+
             <h3>Name: {name}</h3>
             <h3>Model: {model}</h3>
             <h3>Manufacturer: {manufacturer}</h3>

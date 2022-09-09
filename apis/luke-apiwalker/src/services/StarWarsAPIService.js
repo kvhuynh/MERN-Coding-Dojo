@@ -8,3 +8,4 @@ export const getData = async(topic, id) => {
     const result = await http.get(`/${topic}/${id}`)
     return result.data
 }
+

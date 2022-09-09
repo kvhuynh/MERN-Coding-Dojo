@@ -1,10 +1,10 @@
 import './App.css';
 
 import {React, useState, useEffect } from 'react';
-import {Routes, Route, Link, useNavigate} from "react-router-dom";
+import {Routes, Route, useNavigate, useParams} from "react-router-dom";
 
-
-
+import { Wrapper } from "./views/Wrapper"
+import { SearchBar } from "./views/SearchBar"
 import { People } from "./views/People";
 import { Planets } from "./views/Planets"
 import { Starships } from "./views/Starships";
@@ -12,51 +12,39 @@ import { Species } from "./views/Species"
 import { Vehicles } from "./views/Vehicles"
 import { NotFound } from "./views/NotFound"
 import { Films } from "./views/Films" 
-    
+
+import { getData } from "./services/StarWarsAPIService"
+
 function App() {
-
-  const [currentData, setCurrentData] = useState([]);
-  let navigate = useNavigate();
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // setCurrentData([...currentData, e.target[0].value, e.target[1].value])
-    navigate(e.target[0].value + "/" + e.target[1].value)
-  }
+  const { topic, id } = useParams();
+  const [ data, setData ] = useState(null);
+  console.log(topic, id);
+  useEffect(() => {
+      getData(topic, id)
+      .then((data) => {
+          setData(data)
+      }).catch((error) => {
+          console.log(error);
+      }).finally(() => {
+          console.log("done");
+          
+      })
+  }, [topic, id])
 
   return (
-    <div>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <div className="search-bar">
-          <div>
-            <label htmlFor="dropDown">Select:</label>
-            <select name="dropDown" id="dropDown">
-              <option value="people">People</option>
-              <option value="starships">Starships</option>
-              <option value="vehicles">vehicles</option>
-              <option value="films">Films</option>
-              <option value="species">Species</option>
-              <option value="planets">Planets</option>
-            </select>
-          </div>
-          <div>
-            <label htmlFor="">ID: </label>
-            <input type="number" />
-          </div>
-          <button>Search</button>
-        </div>
-      </form>
+      <div>
+          <SearchBar></SearchBar>
+          <Routes>
+                <Route exact path="people/:id" element={ <People peopleData={data}/> }></Route>
+                <Route path="starships/:id" element={ <Starships starshipData={data}/> }></Route>
+                <Route path="vehicles/:id" element={ <Vehicles vehicleData={data}/> }></Route>
+                <Route path="films/:id" element={ <Films filmData={data}/> }></Route>
+                <Route path="species/:id" element={ <Species speciesData={data}/> }></Route>
+                <Route path="planets/:id" element={ <Planets planetData={data}/> }></Route> 
+            </Routes>
+      </div>
 
-      <Routes>
-        <Route path="people/:id" element={ <People/> }></Route>
-        <Route path="starships/:id" element={ <Starships /> }></Route>
-        <Route path="vehicles/:id" element={ <Vehicles /> }></Route>
-        <Route path="films/:id" element={ <Films /> }></Route>
-        <Route path="species/:id" element={ <Species /> }></Route>
-        <Route path="planets/:id" element={ <Planets /> }></Route> 
-      </Routes>
 
-    </div>
   );
 }
     
