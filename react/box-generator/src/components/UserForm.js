@@ -3,6 +3,7 @@ import { useState } from "react";
 export const UserForm = (props) => {
     const [colorList, setColorList] = useState([]);
     const [newColor, setNewColor] = useState("");
+    const [newSize, setNewSize] = useState("");
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -12,6 +13,7 @@ export const UserForm = (props) => {
         }
 
         setColorList([...colorList, newColor]);
+        setNewColor("");
 
     }
 
@@ -25,7 +27,7 @@ export const UserForm = (props) => {
         <div className="container">
             <h1>Color</h1>
             <form onSubmit={ (e) => handleSubmit(e) }>
-                <input type="text" name="color" onChange={ (e) => handleChange(e) }/>
+                <input type="text" name="color" value={newColor} onChange={ (e) => handleChange(e) }/>
                 <button>Add</button>
             </form>
 
