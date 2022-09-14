@@ -16,8 +16,9 @@ export const getProductById = async (id) => {
 }
 
 export const createProduct = async (data) => {
+    console.log(data);
     const res = await http.post("/products", data);
-    console.log("i am here");
+    console.log(res.data);
     return res.data;
 }
 

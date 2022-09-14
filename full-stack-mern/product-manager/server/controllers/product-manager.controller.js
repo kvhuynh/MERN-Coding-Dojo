@@ -10,7 +10,7 @@ const handleCreateProduct = async (req, res) => {
 
     try {
         const product = await createProduct(req.body);
-        return res.json(destination);
+        return res.json(product);
     } catch (error) {
         return res.status(400).json(error);
     }
@@ -45,7 +45,8 @@ const handleDeleteProductById = async (req, res) => {
 
 const handleUpdateProductById = async (req, res) => {
     try {
-        const product = await updateProductById(req.params.body, req.body);
+        const product = await updateProductById(req.params.id, req.body);
+        console.log("here" + product);
         return res.json(product);
     } catch (error) {
         return res.status(400).json(error);

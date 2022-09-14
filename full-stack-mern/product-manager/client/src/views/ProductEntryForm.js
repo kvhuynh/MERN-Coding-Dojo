@@ -1,7 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { createProduct } from "../services/internalApiService";
+import { useNavigate } from "react-router-dom";
 
 export const ProductEntryForm = () => {
+    const navigate = useNavigate();
+
     const [title, setTitle] = useState("");
     const [price, setPrice] = useState("");
     const [description, setDescription] = useState("");
@@ -21,12 +24,12 @@ export const ProductEntryForm = () => {
         createProduct(productData)
             .then((data) => {
                 console.log('new destination data:', data);
+                navigate("/products");
             })
             .catch((error) => {
                 console.log(error);
                 setErrors(error?.response?.data?.errors);
             })
-
     }
 
     return(

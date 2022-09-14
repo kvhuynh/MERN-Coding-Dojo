@@ -26,6 +26,7 @@ const deleteProductById = async (id) => {
 }
 
 const updateProductById = async (id, data) => {
+    console.log("service: updateProductById");
     const product = await ProductManager.findByIdAndUpdate(id, data, {
         runValidators: true,
         new: true
